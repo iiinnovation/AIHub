@@ -1,0 +1,40 @@
+{
+  "name": "aihub-windows",
+  "version": "1.0.0",
+  "description": "Multi-AI Chat Manager for Windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win"
+  },
+  "keywords": ["ai", "chatgpt", "claude", "gemini", "electron"],
+  "author": "AIHub",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0"
+  },
+  "build": {
+    "appId": "com.aihub.windows",
+    "productName": "AIHub",
+    "win": {
+      "target": ["nsis"],
+      "icon": "resources/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "scripts/**/*",
+      "resources/**/*"
+    ]
+  }
+}

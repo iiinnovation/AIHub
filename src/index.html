@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+  <title>AIHub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>AIHub</h1>
+      </div>
+      <nav class="provider-list" id="providerList"></nav>
+    </aside>
+    
+    <main class="main-content">
+      <div class="webview-container" id="webviewContainer"></div>
+      
+      <div class="control-bar">
+        <button class="control-btn" id="btnExtract" title="提取对话">
+          <span class="btn-icon">📋</span>
+          <span class="btn-text">提取</span>
+        </button>
+        <button class="control-btn" id="btnImport" title="导入上下文">
+          <span class="btn-icon">📥</span>
+          <span class="btn-text">导入</span>
+        </button>
+        <button class="control-btn" id="btnCompress" title="压缩上下文">
+          <span class="btn-icon">🗜️</span>
+          <span class="btn-text">压缩</span>
+        </button>
+        <button class="control-btn" id="btnPrompt" title="提示词模板">
+          <span class="btn-icon">📝</span>
+          <span class="btn-text">模板</span>
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal" id="extractModal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>提取的对话</h2>
+        <button class="modal-close" id="extractModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <textarea id="extractedContent" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="extractCopy">复制到剪贴板</button>
+        <button class="btn btn-primary" id="extractClose">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="importModal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>导入上下文</h2>
+        <button class="modal-close" id="importModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <textarea id="importContent" placeholder="粘贴要导入的上下文内容..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <label class="checkbox-label">
+          <input type="checkbox" id="importReplace" checked>
+          替换现有内容
+        </label>
+        <button class="btn btn-secondary" id="importCancel">取消</button>
+        <button class="btn btn-primary" id="importConfirm">导入</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="compressModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>压缩上下文</h2>
+        <button class="modal-close" id="compressModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>这将生成一个压缩提示词，帮助总结当前对话。</p>
+        <div class="form-group">
+          <label for="compressRatio">压缩比例：</label>
+          <select id="compressRatio">
+            <option value="0.25">25%（非常简洁）</option>
+            <option value="0.5" selected>50%（平衡）</option>
+            <option value="0.75">75%（详细）</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="compressCancel">取消</button>
+        <button class="btn btn-primary" id="compressConfirm">生成提示词</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="promptModal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>提示词模板</h2>
+        <button class="modal-close" id="promptModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="template-actions">
+          <button class="btn btn-sm" id="templateNew">+ 新建</button>
+          <button class="btn btn-sm" id="templateImport">导入</button>
+          <button class="btn btn-sm" id="templateExport">导出</button>
+        </div>
+        <div class="template-list" id="templateList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="templateEditModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="templateEditTitle">新建模板</h2>
+        <button class="modal-close" id="templateEditClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="templateName">名称：</label>
+          <input type="text" id="templateName" placeholder="模板名称">
+        </div>
+        <div class="form-group">
+          <label for="templateContent">内容：</label>
+          <textarea id="templateContent" placeholder="模板内容。使用 {clipboard} 插入剪贴板内容。"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="templateEditCancel">取消</button>
+        <button class="btn btn-primary" id="templateEditSave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

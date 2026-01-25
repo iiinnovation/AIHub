@@ -1,0 +1,76 @@
+{
+  "providers": [
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "url": "https://chat.openai.com",
+      "selectors": {
+        "messagesContainer": "main div[class*='react-scroll-to-bottom']",
+        "userMessage": "[data-message-author-role='user']",
+        "assistantMessage": "[data-message-author-role='assistant']",
+        "inputTextarea": "#prompt-textarea",
+        "submitButton": "[data-testid='send-button']"
+      }
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "url": "https://claude.ai",
+      "selectors": {
+        "messagesContainer": "div[class*='conversation-content']",
+        "userMessage": "[data-is-human='true']",
+        "assistantMessage": "[data-is-human='false']",
+        "inputTextarea": "div[contenteditable='true']",
+        "submitButton": "button[aria-label*='Send']"
+      }
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "url": "https://gemini.google.com",
+      "selectors": {
+        "messagesContainer": "chat-window",
+        "userMessage": "user-query",
+        "assistantMessage": "model-response",
+        "inputTextarea": "rich-textarea",
+        "submitButton": "button[aria-label*='Send']"
+      }
+    },
+    {
+      "id": "qwen",
+      "name": "通义千问",
+      "url": "https://tongyi.aliyun.com/qianwen",
+      "selectors": {
+        "messagesContainer": ".chat-container",
+        "userMessage": ".user-message",
+        "assistantMessage": ".assistant-message",
+        "inputTextarea": "textarea",
+        "submitButton": "button[type='submit']"
+      }
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "url": "https://chat.deepseek.com",
+      "selectors": {
+        "messagesContainer": ".chat-messages",
+        "userMessage": ".user-message",
+        "assistantMessage": ".assistant-message",
+        "inputTextarea": "textarea",
+        "submitButton": "button[type='submit']"
+      }
+    },
+    {
+      "id": "doubao",
+      "name": "豆包",
+      "url": "https://www.doubao.com/chat/",
+      "selectors": {
+        "messagesContainer": "main",
+        "userMessage": "div",
+        "assistantMessage": "div",
+        "inputTextarea": "textarea",
+        "submitButton": "div[role='button']"
+      }
+    }
+  ]
+}
